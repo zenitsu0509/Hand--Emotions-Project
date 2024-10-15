@@ -1,8 +1,12 @@
 import cv2
 from ultralytics import YOLO
+import torch
+
+# Check if CUDA (GPU) is available
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load the trained YOLOv11 model
-model = YOLO("best.pt")
+model = YOLO("best.pt").to(device)  
 
 # Open webcam
 cap = cv2.VideoCapture(0)  # 0 for default webcam, or use a video file path
